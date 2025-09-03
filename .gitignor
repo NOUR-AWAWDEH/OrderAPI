@@ -20,6 +20,9 @@
 appsettings*.json
 *.db
 
+# Ignore Migrations folder
+Migrations/
+
 # Logs
 *.log
 
