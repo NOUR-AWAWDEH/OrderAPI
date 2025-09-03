@@ -1,0 +1,42 @@
+# Build results
+[Dd]ebug/
+[Rr]elease/
+[Bb]in/
+[Oo]bj/
+
+# Visual Studio temporary files
+.vs/
+*.user
+*.suo
+*.userprefs
+
+# Rider
+.idea/
+
+# Visual Studio Code
+.vscode/
+
+# ASP.NET specific files
+appsettings*.json
+*.db
+
+# Logs
+*.log
+
+# NuGet Packages
+*.nupkg
+**/packages/*
+!**/packages/build/
+
+# Local history for Visual Studio
+.localhistory/
+
+# Other files
+*.pdb
+*.cache
+*.sln.ide
+
+# Backup files
+*~
+*.bak
+*.tmp
