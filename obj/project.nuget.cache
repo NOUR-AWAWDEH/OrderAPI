@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "vKecaa93oJ0=",
+  "dgSpecHash": "xRrgNpIkCRE=",
   "success": true,
   "projectFilePath": "C:\\Users\\noura\\Desktop\\CQRS\\OrdersAPI\\OrdersAPI.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\noura\\.nuget\\packages\\fluentvalidation\\12.0.0\\fluentvalidation.12.0.0.nupkg.sha512",
     "C:\\Users\\noura\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\noura\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\7.0.0\\microsoft.bcl.asyncinterfaces.7.0.0.nupkg.sha512",
     "C:\\Users\\noura\\.nuget\\packages\\microsoft.build.framework\\17.8.3\\microsoft.build.framework.17.8.3.nupkg.sha512",
