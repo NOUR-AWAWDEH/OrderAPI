@@ -1,3 +1,4 @@
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using OrdersAPI.Data;
 using OrdersAPI.Dtos;
@@ -9,13 +10,20 @@ namespace OrdersAPI.Handlers;
 public class GetOrderByIdQueryHandler : IQueryHandler<GetOrderByIdQuery, OrderDto>
 {
     private readonly AppDbContext _context;
-    public GetOrderByIdQueryHandler(AppDbContext context)
+    private readonly IValidator<GetOrderByIdQuery> _validator;
+    
+    public GetOrderByIdQueryHandler(AppDbContext context, IValidator<GetOrderByIdQuery> validator)
     {
         _context = context;
+        _validator = validator;
     }
 
     public async Task<OrderDto> HandleAsync(GetOrderByIdQuery query)
     {
+        var validationResult = await _validator.ValidateAsync(query);
+        if (!validationResult.IsValid)
+            throw new ValidationException(validationResult.Errors);
+            
         var order = await _context.Orders
             .AsNoTracking()
             .FirstOrDefaultAsync(o => o.Id == query.OrderId)
