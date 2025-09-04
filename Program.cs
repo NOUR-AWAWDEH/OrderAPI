@@ -14,8 +14,10 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 // Register handlers and validators
 builder.Services.AddScoped<ICommandHandler<CreateOrderCommand, OrderDto>, CreateOrderCommandHandler>();
 builder.Services.AddScoped<IQueryHandler<GetOrderByIdQuery, OrderDto>, GetOrderByIdQueryHandler>();
+builder.Services.AddScoped<IQueryHandler<GetOrderSummariesQuery, List<OrderSummaryDto>>, GetOrderSummariesQueryHandler>();
 builder.Services.AddScoped<IValidator<CreateOrderCommand>, CreateOrderCommandValidator>();
 builder.Services.AddScoped<IValidator<GetOrderByIdQuery>, GetOrderByIdQueryValidator>();
+
 
 var app = builder.Build();
 
@@ -42,12 +44,12 @@ app.MapPost("api/orders", async (ICommandHandler<CreateOrderCommand, OrderDto> h
 app.MapGet("api/orders/{id}", async (IQueryHandler<GetOrderByIdQuery, OrderDto> handler, int id) =>
 {
     try
-    { 
+    {
 
         var order = await handler.HandleAsync(new GetOrderByIdQuery(id));
         if (order == null)
             return Results.NotFound();
-        
+
         return Results.Ok(order);
     }
     catch (ValidationException ex)
@@ -56,6 +58,12 @@ app.MapGet("api/orders/{id}", async (IQueryHandler<GetOrderByIdQuery, OrderDto> 
         return Results.BadRequest(errors);
     }
 
+});
+
+app.MapGet("api/orders", async (IQueryHandler<GetOrderSummariesQuery, List<OrderSummaryDto>> handler) =>
+{
+    var summaries = await handler.HandleAsync(new GetOrderSummariesQuery());
+    return Results.Ok(summaries);
 });
 
 app.Run();
